@@ -35,7 +35,7 @@ public class HospitalController {
     @RequestMapping("/hospitalList")
     public String hospitalList(Integer times,Integer insurance ,String name,Integer grade, Integer pageNum, Model model){
         Integer pageSize = 4;
-        if(pageNum == null ) pageNum = 1;
+        if(pageNum == null ){ pageNum = 1;}
         Page <Hospital> pageData = hospitalService.getPageData(times,insurance,name,grade,pageNum, pageSize);
         model.addAttribute("page",pageData);
         model.addAttribute("grade",grade);
@@ -66,6 +66,28 @@ public class HospitalController {
         model.addAttribute("deptList2",deptList2);
 
         return "hospital_detail";
+    }
+
+    @RequestMapping("/detaildemo/{hid}")
+    public String detaildemo(DoctorPage doctorPage, @PathVariable Long hid, Model model){
+        doctorPage.setHid(hid);
+        Hospital hospital = hospitalService.getHospitalById(hid);
+        //两个科室
+        List<Dept> deptList1 = deptService.getListByGrade(1);
+        List<Dept> deptList2 = deptService.getListByGrade(2);
+
+        //放PageBean
+        Page<Doctor> page = doctorService.selectToPage(doctorPage);
+
+        model.addAttribute("page",page);
+        model.addAttribute("hid",hid);
+        model.addAttribute("hospital",hospital);
+        model.addAttribute("grade",doctorPage.getGrade());
+        model.addAttribute("deid",doctorPage.getDeid());
+        model.addAttribute("deptList1",deptList1);
+        model.addAttribute("deptList2",deptList2);
+
+        return "C_hospital_detail";
     }
 
 }

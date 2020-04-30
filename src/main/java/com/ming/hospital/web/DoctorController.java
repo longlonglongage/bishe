@@ -13,9 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpSession;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -87,5 +87,37 @@ public class DoctorController {
         return "doctor_detail";
     }
 
+    @RequestMapping("/addDoctor")
+    public ModelAndView addDoctor(@PathVariable Long id , Model model){
+        Doctor doctor = doctorService.selectById(id);
+        String[] times = doctor.getSurgeryweek().split(","); //就诊时间
+        List<DayInfo> dayInfoList = new ArrayList<>();
+        Date date = new Date();
+
+        for(int i = 0; i < 7; i++){
+            DayInfo dayInfo = new DayInfo();
+            dayInfo.setDate(DateUtils.getDate(date));
+            dayInfo.setFullDate(DateUtils.getFillDate(date));
+            dayInfo.setWeek(DateUtils.getWeek(date));
+            for (String  time : times) {
+                if(dayInfo.getWeek() .equals(time.substring(0,3)) ){
+                    time = time.substring(3); //取上午、下午、晚上
+                    if(time.equals("上午")){
+                        dayInfo.setSw(1);
+                    }else if(time.equals("下午")){
+                        dayInfo.setXw(1);
+                    }else{
+                        dayInfo.setWs(1);
+                    }
+                }
+            }
+            dayInfoList.add(dayInfo);
+            date.setTime(date.getTime() + 1000*60*60*24);
+        }
+        model.addAttribute("doctor",doctor);
+        model.addAttribute("dayInfoList",dayInfoList);
+        ModelAndView modelAndView = new ModelAndView();
+        return modelAndView;
+    }
 
 }
