@@ -68,7 +68,7 @@
                 </el-menu>
             </el-aside>
             <el-container>
-                <iframe name="right" class="el-main" src="doctor_setting.html" width="100%" height="90%"
+                <iframe name="right" class="el-main" src="hospital.html" width="100%" height="90%"
                         frameborder="0"></iframe>
             </el-container>
         </el-container>
@@ -101,11 +101,24 @@
                 },
                 {
                     "path": "2",
+                    "title": "机构管理",
+                    "icon": "fa-hospitals",
+                    "children": [
+                        {
+                            "path": "/2-1",
+                            "title": "分部设置",
+                            "linkUrl": "hospital.html",
+                            "children": []
+                        },
+                    ]
+                },
+                {
+                    "path": "3",
                     "title": "预约管理",
                     "icon": "fa-tty",
                     "children": [
                         {
-                            "path": "/2-1",
+                            "path": "/3-1",
                             "title": "套餐管理",
                             "linkUrl": "setmeal.html",
                             "children": []
