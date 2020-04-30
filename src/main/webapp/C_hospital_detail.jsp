@@ -3,12 +3,21 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-    <title>医者天下hospital_detail.jsp</title>
+    <title>医者天下医院简介</title>
     <meta charset="UTF-8">
     <base target="_self" href="<%=basePath%>">
     <script src="js/jquery-1.11.2.min.js"></script>
     <link rel="stylesheet" href="css/hospital_detail.css" />
 </head>
+<style>
+    .info-box{
+        border: 1px solid #eaeaea;
+        margin-top: 20px;
+        font-size: 17px;
+        line-height: 2em;
+        text-indent: 3em;
+    }
+</style>
 <body>
 <header class="header">
     <header id="fastTop" class="header" style="height: 100px;">
@@ -54,13 +63,16 @@
         </article>
         <aside id="Tab" class="h-tabs">
             <div class="nav clearfix">
-                <a href="hospital/detail/${hid}" data-value="0" class="hd fl current">全部医生</a>
-                <a href="javascript:void 0" data-value="1" data-flag="0" id="tab-desc" class="hd  fl">医院简介</a>
-                <a href="javascript:void 0" data-value="2" class="hd  fl">挂号规则</a>
+                <a href="hospital/detail/${hid}" data-value="0" class="hd fl">全部医生</a>
+                <a href="javascript:void 0" data-value="1" data-flag="0" id="tab-desc" class="hd  fl current">医院简介</a>
+                <a href="hospital/detaildemo1/${hid}" data-value="2" class="hd  fl">挂号规则</a>
             </div>
 
             <div class="main">
-               <h1>这里写医院简介</h1>
+                <div class="info-box">
+                    <p>Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程.ava是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念，因此Java语言具有功能强大和简单易用两个特征。Java语言作为静态面向对象编程语言的代表，极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程</p></div>
+            </div>
+        </aside>
     </div>
 
 

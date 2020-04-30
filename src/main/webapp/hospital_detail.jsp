@@ -56,9 +56,8 @@
             <div class="nav clearfix">
                 <a href="hospital/detail/${hid}" data-value="0" class="hd fl current">全部医生</a>
                 <a href="hospital/detaildemo/${hid}" data-value="1" data-flag="0" id="tab-desc" class="hd  fl">医院简介</a>
-                <a href="javascript:void 0" data-value="2" class="hd  fl">挂号规则</a>
+                <a href="hospital/detaildemo1/${hid}" data-value="2" class="hd  fl">挂号规则</a>
             </div>
-
             <div class="main">
                 <!--  全部医生 -->
                 <div class="content  current otiotns" style="display: block;">
