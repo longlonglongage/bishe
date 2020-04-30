@@ -57,7 +57,6 @@
                 <a href="hospital/detail/${hid}" data-value="0" class="hd fl current">全部医生</a>
                 <a href="javascript:void 0" data-value="1" data-flag="0" id="tab-desc" class="hd  fl">医院简介</a>
                 <a href="javascript:void 0" data-value="2" class="hd  fl">挂号规则</a>
-                <a href="javascript:void 0" data-value="3" class="hd  fl">用户评价&nbsp;<span class="evaluation-num" id="user-evaluation">(1206)</span></a>
             </div>
 
             <div class="main">
@@ -66,7 +65,6 @@
                     <div class="select-condition hospital-detail">
                         <div class="select-detail" data-type="1">
                             <h4>一级科室:</h4>
-
                             <ul class="dropmenus" id="depart-level1-ul" style="margin-bottom: 10px;">
                                 <li data-department-flag="1" data-value="0" id="depart0" <c:if test="${empty deid}">class="select-cur"</c:if> data-child="1"><a href="hospital/detail/${hid}?grade=${grade}">全部</a></li>
                                 <c:forEach items="${deptList1}" var="dept">
@@ -75,7 +73,6 @@
                             </ul>
                             <h4>二级科室:</h4>
                             <ul class="dropmenus" id="depart-level2-ul" style="margin-bottom: 10px;">
-                                <%--<li data-department-flag="1" data-value="0" id="depart0" <c:if test="${empty deid}">class="select-cur"</c:if> data-child="1"><a href="hospital/detail/${hid}?grade=${grade}">全部</a></li>--%>
                                 <c:forEach items="${deptList2}" var="dept">
                                     <li data-department-flag="1" <c:if test="${deid == dept.deid }">class="select-cur"</c:if>  id="${dept.dename}"><a href="hospital/detail/${hid}?grade=${grade}&deid=${dept.deid}">${dept.dename}</a></li>
                                 </c:forEach>
@@ -202,8 +199,6 @@
                     </ul>
                 </span>
                     </div>
-
-
                 </div>
             </div>
         </aside>
@@ -251,7 +246,6 @@
         </div>
     </div>
 </footer>
-
 
 <script type="text/javascript">
 
