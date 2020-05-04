@@ -127,7 +127,6 @@ public class HospitalController {
         return "guahaoguizhe";
     }
 
-    //分页查询
     @RequestMapping("/findPage")
     @ApiOperation(value = "分页查询")
     public PageResult selectByPage(@RequestBody QueryPageBean queryPageBean) {

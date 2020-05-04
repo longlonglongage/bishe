@@ -48,5 +48,4 @@ public interface HospitalMapper extends BaseMapper<Hospital> {
      * @return 页面结果
      */
     Page<Hospital> selectByPage(@Param( "hname" ) String hname);
-
 }
