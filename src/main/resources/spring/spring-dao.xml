@@ -19,18 +19,26 @@
 
     <bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
         <property name="dataSource" ref="dataSource"/>
-        <property name="typeAliasesPackage" value="com.ming.hospital.pojo" />
-        <property name="mapperLocations" value="classpath:mapper/*.xml" />
-        <property name="configLocation" value="classpath:sqlMapConfig.xml" />
+        <property name="typeAliasesPackage" value="com.ming.hospital.pojo"/>
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+        <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            helperDialect=mysql
+                            reasonable=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
     </bean>
 
-    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer" >
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" id="mapperScannerConfigurer">
         <property name="basePackage" value="com.ming.hospital.dao"/>
     </bean>
-
-
-
-
 
 
 </beans>
