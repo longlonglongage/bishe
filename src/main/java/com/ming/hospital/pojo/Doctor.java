@@ -7,19 +7,20 @@ import lombok.Data;
 @Data
 @TableName(value = "DOCTOR")
 public class Doctor {
+    @TableId
+    private Long did;
 
     private String surgeryweek;
 
     private Hospital hospital;
 
-    @TableId
+
     private Long hid;
 
     private Dept dept;
 
     private Long deid;
 
-    private Long did;
 
     private String dname;
 

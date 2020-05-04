@@ -31,4 +31,6 @@ public interface HospitalService {
     Boolean del(Integer id);
 
     Boolean edit(Hospital hospital);
+
+    List<Hospital> selectByPage(String hospitalName);
 }

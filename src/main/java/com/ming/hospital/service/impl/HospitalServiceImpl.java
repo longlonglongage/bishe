@@ -148,4 +148,9 @@ public class HospitalServiceImpl implements HospitalService {
         return flag;
     }
 
+    @Override
+    public List<Hospital> selectByPage(String hospitalName) {
+        List<Hospital> hospitals = hospitalMapper.selectByPage(hospitalName);
+        return hospitals;
+    }
 }

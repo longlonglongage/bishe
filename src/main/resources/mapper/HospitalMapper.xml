@@ -347,4 +347,16 @@
       times = #{times,jdbcType=INTEGER}
     where hid = #{hid,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByPage" resultType="Hospital">
+    select
+    *
+    FROM hospital
+    <where>1=1
+      <if test="hname !=null and hname != ''">
+        AND INSTR(hname,#{hname})>0
+      </if>
+    </where>
+  </select>
+
 </mapper>

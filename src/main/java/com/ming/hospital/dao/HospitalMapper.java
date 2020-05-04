@@ -6,7 +6,9 @@ import com.ming.hospital.dto.HospitalPage;
 import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.HospitalExample;
+
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 public interface HospitalMapper extends BaseMapper<Hospital> {
@@ -36,6 +38,8 @@ public interface HospitalMapper extends BaseMapper<Hospital> {
 
     Integer selectToPageTotalCount(HospitalPage hospitalPage);
 
-   List<Hospital> getListByTop3();
+    List<Hospital> getListByTop3();
+
+    List<Hospital> selectByPage(String hname);
 
 }

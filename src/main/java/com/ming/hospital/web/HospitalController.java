@@ -1,5 +1,6 @@
 package com.ming.hospital.web;
 
+import com.baomidou.mybatisplus.plugins.pagination.PageHelper;
 import com.ming.hospital.dao.DeptMapper;
 import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
@@ -135,11 +136,23 @@ public class HospitalController {
         return "guahaoguizhe";
     }
 
+    //分页查询
+    @RequestMapping("/selectByPage")
+    @ApiOperation(value = "添加数据")
+    public Result selectByPage(@RequestParam(required = false)String hospitalName,
+                               @RequestParam(required = false)Integer pageNo,
+                               @RequestParam(required = false)Integer pageSize) {
+        pageNo = pageNo == null ? 1 : pageNo;
+        pageSize = pageSize == null ? 3 : pageSize;
+        PageHelper.startPage(pageNo, pageSize);
+        List<Hospital> hospitals = hospitalService.selectByPage(hospitalName);
+        return Result.ok(hospitals,"添加数据成功");
+    }
 
     // 添加数据
     @RequestMapping("/addhospital")
     @ApiOperation(value = "添加数据")
-    public Result add(@RequestParam(required = true) @ApiParam(value = "医院信息")Hospital hospital) {
+    public Result add(@RequestParam(required = true)Hospital hospital) {
         hospitalService.addHospital(hospital);
         return Result.ok("添加数据成功");
     }
@@ -147,7 +160,7 @@ public class HospitalController {
     //编辑数据
     @RequestMapping("edit")
     @ApiOperation(value = "编辑数据")
-    public Result edit( @RequestParam(required = true) @ApiParam(value = "医院信息")Hospital hospital) {
+    public Result edit( @RequestParam(required = true)Hospital hospital) {
         hospitalService.edit(hospital);
         return Result.ok("编辑数据成功");
     }
