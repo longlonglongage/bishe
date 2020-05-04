@@ -164,7 +164,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ming.hospital.pojo.Hospital" >
+  <insert id="iinsert" parameterType="com.ming.hospital.pojo.Hospital" >
     insert into hospital (hid, hname, hphone, 
       address, score, grade, 
       description, insurance, image, 

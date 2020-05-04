@@ -120,4 +120,32 @@ public class HospitalServiceImpl implements HospitalService {
         }
         return hospitalMapper.getListByTop3();
     }
+
+    @Override
+    public Integer addHospital(Hospital hospital) {
+        Integer insert = hospitalMapper.insert(hospital);
+        return insert;
+    }
+
+    @Override
+    public Boolean del(Integer id) {
+        Boolean flag =false;
+        Integer integer = hospitalMapper.deleteById(id);
+        if (integer!=0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean edit(Hospital hospital) {
+        String id = "a";
+        Boolean flag =false;
+        Integer integer = hospitalMapper.updateById(hospital);
+        if (integer!=0){
+            flag = true;
+        }
+        return flag;
+    }
+
 }

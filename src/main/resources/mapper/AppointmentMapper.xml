@@ -110,7 +110,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ming.hospital.pojo.Appointment" >
+  <insert id="iinsert" parameterType="com.ming.hospital.pojo.Appointment" >
     insert into appointment (aid, uid, visitTime,
     did, name, idcast, aphone,
     createtime, updatetime)

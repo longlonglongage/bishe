@@ -1,18 +1,19 @@
 package com.ming.hospital.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.AppointmentExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface AppointmentMapper {
+public interface AppointmentMapper extends BaseMapper<Appointment> {
     int countByExample(AppointmentExample example);
 
     int deleteByExample(AppointmentExample example);
 
     int deleteByPrimaryKey(Long aid);
 
-    int insert(Appointment record);
+    int iinsert(Appointment record);
 
     int insertSelective(Appointment record);
 

@@ -17,6 +17,6 @@ public interface DeptService {
 
     List<Dept> getListByGrade(Integer grade);
 
-
+    Integer addDept(Dept dept);
 
 }

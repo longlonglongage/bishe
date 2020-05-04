@@ -25,4 +25,10 @@ public interface HospitalService {
     List<Hospital> getList();
 
     List<Hospital> getListByTop3();
+
+    Integer addHospital(Hospital hospital);
+
+    Boolean del(Integer id);
+
+    Boolean edit(Hospital hospital);
 }

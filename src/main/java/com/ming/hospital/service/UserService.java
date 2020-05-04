@@ -1,5 +1,6 @@
 package com.ming.hospital.service;
 
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.User;
 import org.springframework.stereotype.Service;
 
@@ -12,4 +13,7 @@ public interface UserService {
     boolean active(String code);
     User login(User user);
     boolean checkUserName(String user);
+
+    Integer addUser(User user);
+
 }

@@ -1,18 +1,20 @@
 package com.ming.hospital.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.Dept;
 import com.ming.hospital.pojo.DeptExample;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-public interface DeptMapper {
+public interface DeptMapper extends BaseMapper<Dept> {
     int countByExample(DeptExample example);
 
     int deleteByExample(DeptExample example);
 
     int deleteByPrimaryKey(Long deid);
 
-    int insert(Dept record);
+    int iinsert(Dept record);
 
     int insertSelective(Dept record);
 

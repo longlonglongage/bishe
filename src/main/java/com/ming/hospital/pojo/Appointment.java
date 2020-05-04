@@ -1,5 +1,6 @@
 package com.ming.hospital.pojo;
 
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -11,6 +12,7 @@ import java.util.Date;
 public class Appointment {
 
     @ApiModelProperty(name = "aid",value = "委任id")
+    @TableId
     private Long aid;
 
     @ApiModelProperty(name = "uid",value = "用户id")

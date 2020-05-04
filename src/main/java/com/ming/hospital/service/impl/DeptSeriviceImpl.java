@@ -3,6 +3,7 @@ package com.ming.hospital.service.impl;
 import com.ming.hospital.dao.DeptMapper;
 import com.ming.hospital.pojo.Dept;
 import com.ming.hospital.pojo.DeptExample;
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.service.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,11 @@ public class DeptSeriviceImpl implements DeptService {
         deptExample.createCriteria().andDegradeEqualTo(grade);
         List<Dept> depts = deptMapper.selectByExample(deptExample);
         return depts;
+    }
+
+    @Override
+    public Integer addDept(Dept dept) {
+        Integer insert = deptMapper.insert(dept);
+        return insert;
     }
 }

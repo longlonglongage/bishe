@@ -1,6 +1,8 @@
 package com.ming.hospital.dao;
 
+import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.ming.hospital.dto.DoctorPage;
+import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.Doctor;
 import com.ming.hospital.pojo.DoctorExample;
 import java.util.List;
@@ -8,14 +10,14 @@ import java.util.List;
 import com.ming.hospital.pojo.Page;
 import org.apache.ibatis.annotations.Param;
 
-public interface DoctorMapper {
+public interface DoctorMapper extends BaseMapper<Doctor> {
     int countByExample(DoctorExample example);
 
     int deleteByExample(DoctorExample example);
 
     int deleteByPrimaryKey(Long did);
 
-    int insert(Doctor record);
+    int iinsert(Doctor record);
 
     int insertSelective(Doctor record);
 

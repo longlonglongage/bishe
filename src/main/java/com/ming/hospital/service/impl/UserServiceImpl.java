@@ -1,6 +1,7 @@
 package com.ming.hospital.service.impl;
 
 import com.ming.hospital.dao.UserMapper;
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.User;
 import com.ming.hospital.pojo.UserExample;
 import com.ming.hospital.service.UserService;
@@ -9,6 +10,7 @@ import com.ming.hospital.utils.MailUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public class UserServiceImpl implements UserService {
     public boolean register(User user) {
         String pwd = CommonUtils.MD5(user.getPwd());
         user.setPwd(pwd);
-        int insert = userMapper.insert(user);
+        int insert = userMapper.iinsert(user);
         //发送邮箱
         new MailUtil(user).start();
         return insert >0 ? true:false;
@@ -70,5 +72,11 @@ public class UserServiceImpl implements UserService {
         List<User> users = userMapper.selectByExample(userExample);
         return users.size() > 0 ? true : false;
 
+    }
+
+    @Override
+    public Integer addUser(User user) {
+        Integer insert = userMapper.insert(user);
+        return insert;
     }
 }

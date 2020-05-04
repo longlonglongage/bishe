@@ -97,7 +97,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ming.hospital.pojo.Dept" >
+  <insert id="iinsert" parameterType="com.ming.hospital.pojo.Dept" >
     insert into dept (deid, degrade, dename
       )
     values (#{deid,jdbcType=BIGINT}, #{degrade,jdbcType=INTEGER}, #{dename,jdbcType=VARCHAR}

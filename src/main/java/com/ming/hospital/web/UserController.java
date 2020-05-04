@@ -1,8 +1,11 @@
 package com.ming.hospital.web;
 
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.User;
 import com.ming.hospital.service.UserService;
 import com.ming.hospital.utils.CommonUtils;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +25,8 @@ import java.util.UUID;
 /**
  * Created by Ming on 2017/11/17.
  */
+@Slf4j
+@Api(value = "用户信息Controller", tags = "用户信息相关接口")
 @Controller
 @RequestMapping("/user")
 public class UserController {
@@ -80,7 +86,13 @@ public class UserController {
         return "redirect:/";
     }
 
-
+    // 添加数据
+    @RequestMapping("/adduser")
+    public ModelAndView add(User user) {
+        userService.addUser(user);
+        ModelAndView mav = new ModelAndView("redirect:/userlist");
+        return mav;
+    }
 
 
 

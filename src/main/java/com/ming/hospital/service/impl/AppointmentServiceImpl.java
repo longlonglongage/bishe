@@ -3,6 +3,7 @@ package com.ming.hospital.service.impl;
 import com.ming.hospital.dao.AppointmentMapper;
 import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.AppointmentExample;
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.service.AppointmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +38,12 @@ public class AppointmentServiceImpl implements AppointmentService {
     public List<Appointment> listAll() {
         List<Appointment> appointments = appointmentMapper.selectByExample(new AppointmentExample());
         return appointments;
+    }
+
+    @Override
+    public Integer addAppointment(Appointment appointment) {
+        Integer insert = appointmentMapper.insert(appointment);
+        return insert;
     }
 
 

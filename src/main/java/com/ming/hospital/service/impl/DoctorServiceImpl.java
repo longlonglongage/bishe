@@ -4,8 +4,10 @@ import com.ming.hospital.dao.DoctorMapper;
 import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.pojo.Doctor;
 import com.ming.hospital.pojo.DoctorExample;
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.Page;
 import com.ming.hospital.service.DoctorService;
+import net.bytebuddy.matcher.BooleanMatcher;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -65,4 +67,30 @@ public class DoctorServiceImpl implements DoctorService  {
         return  doctorMapper.getListByTop4();
     }
 
+    @Override
+    public Integer addDoctor(Doctor doctor) {
+        Integer insert = doctorMapper.insert(doctor);
+        return insert;
+    }
+
+    @Override
+    public Boolean del(Integer id) {
+        Boolean flag =false;
+        Integer integer = doctorMapper.deleteById(id);
+        if (integer!=0){
+            flag = true;
+        }
+        return flag;
+    }
+
+    @Override
+    public Boolean edit(Doctor doctor) {
+        String id = "a";
+        Boolean flag =false;
+        Integer integer = doctorMapper.updateById(doctor);
+        if (integer!=0){
+            flag = true;
+        }
+        return flag;
+    }
 }

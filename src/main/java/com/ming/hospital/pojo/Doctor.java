@@ -1,15 +1,18 @@
 package com.ming.hospital.pojo;
 
+import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import lombok.Data;
 
 @Data
 @TableName(value = "DOCTOR")
 public class Doctor {
+
     private String surgeryweek;
 
     private Hospital hospital;
 
+    @TableId
     private Long hid;
 
     private Dept dept;

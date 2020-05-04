@@ -1,6 +1,7 @@
 package com.ming.hospital.service;
 
 import com.ming.hospital.pojo.Appointment;
+import com.ming.hospital.pojo.Dept;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,4 +18,5 @@ public interface AppointmentService {
 
     List<Appointment> listAll();
 
+    Integer addAppointment(Appointment appointment);
 }

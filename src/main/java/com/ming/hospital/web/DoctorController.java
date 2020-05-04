@@ -1,13 +1,13 @@
 package com.ming.hospital.web;
 
 import com.ming.hospital.dto.DoctorPage;
-import com.ming.hospital.pojo.DayInfo;
-import com.ming.hospital.pojo.Dept;
-import com.ming.hospital.pojo.Doctor;
-import com.ming.hospital.pojo.Page;
+import com.ming.hospital.model.Result;
+import com.ming.hospital.pojo.*;
 import com.ming.hospital.service.DeptService;
 import com.ming.hospital.service.DoctorService;
 import com.ming.hospital.utils.DateUtils;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +23,8 @@ import java.util.List;
 /**
  * Created by Ming on 2017/11/19.
  */
+@Slf4j
+@Api(value = "医生信息Controller", tags = "医生信息相关接口")
 @Controller
 @RequestMapping("/doctor")
 public class DoctorController {
@@ -118,6 +120,28 @@ public class DoctorController {
         model.addAttribute("dayInfoList",dayInfoList);
         ModelAndView modelAndView = new ModelAndView();
         return modelAndView;
+    }
+
+    // 添加数据
+    @RequestMapping("/adddoctor")
+    public Result add(Doctor doctor) {
+        doctorService.addDoctor(doctor);
+        return Result.ok("添加数据成功");
+    }
+
+    //编辑数据
+    @RequestMapping("edit")
+    public Result edit(Doctor doctor) {
+        doctorService.edit(doctor);
+        return Result.ok("编辑数据成功");
+    }
+
+
+    //删除数据
+    @RequestMapping("/deldoctor")
+    public Result del(Integer id) {
+        doctorService.del(id);
+        return Result.ok("删除数据成功");
     }
 
 }

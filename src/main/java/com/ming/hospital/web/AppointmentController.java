@@ -3,22 +3,28 @@ package com.ming.hospital.web;
 
 import com.ming.hospital.pojo.Appointment;
 import com.ming.hospital.pojo.Doctor;
+import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.User;
 import com.ming.hospital.service.AppointmentService;
 import com.ming.hospital.service.DoctorService;
 import com.ming.hospital.utils.CommonUtils;
+import io.swagger.annotations.Api;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
 import java.util.*;
 /**
  * Created by Ming on 2017/11/26.
  */
+@Slf4j
+@Api(value = "预约信息Controller", tags = "预约信息相关接口")
 @Controller
 @RequestMapping("/appointment")
 public class AppointmentController {
@@ -60,5 +66,14 @@ public class AppointmentController {
             }
         }
         return resultData;
+    }
+
+
+    // 添加数据
+    @RequestMapping("/addappointment")
+    public ModelAndView add(Appointment appointment) {
+        appointmentService.addAppointment(appointment);
+        ModelAndView mav = new ModelAndView("redirect:/list");
+        return mav;
     }
 }

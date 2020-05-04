@@ -105,7 +105,7 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.ming.hospital.pojo.User" >
+  <insert id="iinsert" parameterType="com.ming.hospital.pojo.User" >
     insert into user (uid, user, pwd, 
       name, gender, email, 
       phone, createTime, updateTime, 
