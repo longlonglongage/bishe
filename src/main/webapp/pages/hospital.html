@@ -235,7 +235,7 @@
             imageUrl: null,//模型数据，用于上传图片完成后图片预览
             pagination: {//分页相关模型数据
                 currentPage: 1,//当前页码
-                pageSize: 10,//每页显示的记录数
+                pageSize: 5,//每页显示的记录数
                 total: 11,//总记录数
                 queryString: null//查询条件
             },
@@ -379,7 +379,7 @@
                     pageSize: this.pagination.pageSize,
                     queryString: this.pagination.queryString
                 };
-                axios.post("/checkitem/findPage.do", param).then((res) => {
+                axios.post("/Hospital/findPage", param).then((res) => {
                     //解析Controller响应回的数据，为模型数据赋值
                     this.pagination.total = res.data.total;
                     this.dataList = res.data.rows;

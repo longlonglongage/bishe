@@ -1,6 +1,7 @@
 package com.ming.hospital.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.github.pagehelper.Page;
 import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
 import com.ming.hospital.pojo.Appointment;
@@ -40,6 +41,12 @@ public interface HospitalMapper extends BaseMapper<Hospital> {
 
     List<Hospital> getListByTop3();
 
-    List<Hospital> selectByPage(String hname);
+    /**
+     * 分页查询医院
+     *
+     * @param hname 医院名
+     * @return 页面结果
+     */
+    Page<Hospital> selectByPage(@Param( "hname" ) String hname);
 
 }

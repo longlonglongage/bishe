@@ -348,7 +348,7 @@
     where hid = #{hid,jdbcType=BIGINT}
   </update>
 
-  <select id="selectByPage" resultType="Hospital">
+  <select id="selectByPage" resultType="Hospital" parameterType="string">
     select
     *
     FROM hospital
