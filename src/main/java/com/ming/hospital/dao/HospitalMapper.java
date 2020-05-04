@@ -1,7 +1,6 @@
 package com.ming.hospital.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.github.pagehelper.Page;
 import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
 import com.ming.hospital.pojo.Appointment;
@@ -12,7 +11,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-public interface HospitalMapper extends BaseMapper<Hospital> {
+public interface HospitalMapper {
     int countByExample(HospitalExample example);
 
     int deleteByExample(HospitalExample example);
@@ -41,12 +40,13 @@ public interface HospitalMapper extends BaseMapper<Hospital> {
 
     List<Hospital> getListByTop3();
 
-    /**
-     * 分页查询医院
-     *
-     * @param hname 医院名
-     * @return 页面结果
-     */
-    Page<Hospital> selectByPage(@Param( "hname" ) String hname);
+    List<Hospital> selectByPage( @Param("hname")String hname);
 
+    Hospital selectById( @Param("hid")Integer hid);
+
+    void del(@Param("hid")Integer hid);
+
+    Integer addHospital(Hospital hospital);
+
+    Integer edit(Hospital hospital);
 }

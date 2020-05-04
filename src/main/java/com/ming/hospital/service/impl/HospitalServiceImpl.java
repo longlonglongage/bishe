@@ -1,11 +1,10 @@
 package com.ming.hospital.service.impl;
 
-import com.github.pagehelper.PageHelper;
+import com.ming.hospital.dao.AppointmentMapper;
 import com.ming.hospital.dao.DoctorMapper;
 import com.ming.hospital.dao.HospitalMapper;
+import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
-import com.ming.hospital.model.PageResult;
-import com.ming.hospital.model.QueryPageBean;
 import com.ming.hospital.pojo.*;
 import com.ming.hospital.service.AppointmentService;
 import com.ming.hospital.service.HospitalService;
@@ -30,139 +29,128 @@ public class HospitalServiceImpl implements HospitalService {
 
 
     @Override
-    public Page getPageData(Integer times, Integer insurance, String name, Integer grade, Integer pageNum, Integer pageSize) {
+    public Page getPageData(Integer times,Integer insurance,String name, Integer grade, Integer pageNum, Integer pageSize) {
         Page<Hospital> page = new Page<>();
         String level = "";
         //1三甲医院 2三乙医院 3二甲医院 4二级医
-        if (grade != null) {
+        if( grade != null){
 
-            switch (grade) {
-                case 1: {
-                    level = "三甲";
-                    break;
+            switch (grade){
+                case 1 : {
+                    level = "三甲"; break;
                 }
-                case 2: {
-                    level = "三乙";
-                    break;
+                case 2 :{
+                    level = "三乙";break;
                 }
-                case 3: {
-                    level = "二甲";
-                    break;
+                case 3:{
+                    level = "二甲";break;
                 }
-                case 4: {
-                    level = "二级";
-                    break;
+                case 4 :{
+                    level = "二级";break;
                 }
             }
         }
         Integer start = (pageNum - 1) * pageSize;//开始搜索的索引
         //封装dto
         HospitalPage hospitalPage = new HospitalPage();
-        hospitalPage.setTimes( times );
-        hospitalPage.setGrade( level );
-        hospitalPage.setName( name );
-        hospitalPage.setPageNum( start );
-        hospitalPage.setPageSize( pageSize );
-        hospitalPage.setInsurance( insurance );
-        List<Hospital> hospitals = hospitalMapper.selectToPage( hospitalPage );
+        hospitalPage.setTimes(times);
+        hospitalPage.setGrade(level);
+        hospitalPage.setName(name);
+        hospitalPage.setPageNum(start);
+        hospitalPage.setPageSize(pageSize);
+        hospitalPage.setInsurance(insurance);
+        List<Hospital> hospitals = hospitalMapper.selectToPage(hospitalPage);
         for (Hospital hospital : hospitals) {
             DoctorExample doctorExample = new DoctorExample();
-            doctorExample.createCriteria().andHidEqualTo( hospital.getHid() );
-            List<Doctor> list = doctorMapper.selectByExample( doctorExample );
-            hospital.setDoctorList( list );
+            doctorExample.createCriteria().andHidEqualTo(hospital.getHid());
+            List<Doctor> list = doctorMapper.selectByExample(doctorExample);
+            hospital.setDoctorList(list);
 
-            Integer integer = appointmentService.selectTimesFromHospital( hospital.getHid() );
-            hospital.setTimes( integer );
-            hospitalMapper.updateByPrimaryKeySelective( hospital );
+            Integer integer = appointmentService.selectTimesFromHospital(hospital.getHid());
+            hospital.setTimes(integer);
+            hospitalMapper.updateByPrimaryKeySelective(hospital);
             //服务次数
         }
 
         //封装PageBean
-        page.setData( hospitals );
-        page.setTotalCount( selectToPageTotalCount( hospitalPage ) );
-        page.setTotalPage( (int) (Math.ceil( page.getTotalCount() * 1.0 / pageSize )) );
-        page.setPageSize( pageSize );
-        page.setPageNum( pageNum );
+        page.setData(hospitals);
+        page.setTotalCount(selectToPageTotalCount(hospitalPage));
+        page.setTotalPage((int) (Math.ceil(page.getTotalCount()*1.0/pageSize) ) );
+        page.setPageSize(pageSize);
+        page.setPageNum(pageNum);
         return page;
 
     }
 
     @Override
     public Integer totalCount() {
-        return hospitalMapper.countByExample( new HospitalExample() );
+        return hospitalMapper.countByExample(new HospitalExample());
     }
 
     @Override
     public Integer selectToPageTotalCount(HospitalPage hospitalPage) {
-        return hospitalMapper.selectToPageTotalCount( hospitalPage );
+        return hospitalMapper.selectToPageTotalCount(hospitalPage);
     }
 
     @Override
     public Hospital getHospitalById(Long hid) {
-        Hospital hospital = hospitalMapper.selectByPrimaryKey( hid );
+        Hospital hospital = hospitalMapper.selectByPrimaryKey(hid);
         DoctorExample doctorExample = new DoctorExample();
-        doctorExample.createCriteria().andHidEqualTo( hid );
-        List<Doctor> list = doctorMapper.selectByExample( doctorExample );
-        hospital.setDoctorList( list );
-        hospital.setTimes( appointmentService.selectTimesFromHospital( hospital.getHid() ) );
-        hospitalMapper.updateByPrimaryKeySelective( hospital );
+        doctorExample.createCriteria().andHidEqualTo(hid);
+        List<Doctor> list = doctorMapper.selectByExample(doctorExample);
+        hospital.setDoctorList(list);
+        hospital.setTimes(appointmentService.selectTimesFromHospital(hospital.getHid()));
+        hospitalMapper.updateByPrimaryKeySelective(hospital);
         return hospital;
     }
 
     @Override
     public List<Hospital> getList() {
 
-        return hospitalMapper.selectByExample( new HospitalExample() );
+        return   hospitalMapper.selectByExample(new HospitalExample());
     }
 
     @Override
     public List<Hospital> getListByTop3() {
         List<Hospital> listByTop3 = hospitalMapper.getListByTop3();
         for (Hospital hospital : listByTop3) {
-            Integer integer = appointmentService.selectTimesFromHospital( hospital.getHid() );
-            hospital.setTimes( integer );
-            hospitalMapper.updateByPrimaryKeySelective( hospital );
+            Integer integer = appointmentService.selectTimesFromHospital(hospital.getHid());
+            hospital.setTimes(integer);
+            hospitalMapper.updateByPrimaryKeySelective(hospital);
         }
         return hospitalMapper.getListByTop3();
     }
 
     @Override
     public Integer addHospital(Hospital hospital) {
-        Integer insert = hospitalMapper.insert( hospital );
+        Integer insert = hospitalMapper.addHospital(hospital);
         return insert;
     }
 
     @Override
-    public Boolean del(Integer id) {
-        Boolean flag = false;
-        Integer integer = hospitalMapper.deleteById( id );
-        if (integer != 0) {
-            flag = true;
-        }
-        return flag;
+    public void del(Integer id) {
+        hospitalMapper.del(id);
     }
 
     @Override
     public Boolean edit(Hospital hospital) {
         String id = "a";
-        Boolean flag = false;
-        Integer integer = hospitalMapper.updateById( hospital );
-        if (integer != 0) {
+        Boolean flag =false;
+        Integer integer = hospitalMapper.edit(hospital);
+        if (integer!=0){
             flag = true;
         }
         return flag;
     }
 
     @Override
-    public PageResult pageQuery(QueryPageBean queryPageBean) {
-        //使用 PageHelper 完成分页查询
-        com.github.pagehelper.Page<Hospital> page = PageHelper.startPage(
-                queryPageBean.getCurrentPage(), queryPageBean.getPageSize() ).
-                doSelectPage( () -> hospitalMapper.selectByPage( queryPageBean.getQueryString() ) );
-        return PageResult.builder()
-                //返回总条数
-                .total( page.getTotal() )
-                //返回分页数据集合
-                .rows( page.getResult() ).build();
+    public List<Hospital> selectByPage(String hname) {
+        List<Hospital> hospitals = hospitalMapper.selectByPage(hname);
+        return hospitals;
+    }
+
+    @Override
+    public Hospital selectById(Integer id) {
+        return hospitalMapper.selectById(id);
     }
 }

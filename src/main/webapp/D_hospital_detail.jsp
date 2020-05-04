@@ -142,7 +142,7 @@
         </div>
     </div>
 </footer>
-
+    There is no configured/running web-servers found! Please, run any web-configuration and hit the Refresh button!
 <script type="text/javascript">
 
 </script>
