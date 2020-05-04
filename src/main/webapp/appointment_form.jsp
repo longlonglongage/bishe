@@ -27,8 +27,8 @@
     <header id="fastTop" class="header" style="height: 100px;">
         <div class="search_box">
                 <span class="logo">
-                    <a href="">
-                        <img src="images/logo.jpg"></a>
+                    <%--<a href="">
+                        <img src="images/logo.jpg"></a>--%>
                 </span>
             <input type="hidden" id="current-area-info" data-province="16" data-city="371" data-region="0" data-provtag="0" data-value="1">
 

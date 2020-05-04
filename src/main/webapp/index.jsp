@@ -1,5 +1,5 @@
 <%@page language="java" contentType="text/html; UTF-8" pageEncoding="UTF-8" %>
-<%@include file="common.jsp"%>
+<%@include file="common.jsp" %>
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
@@ -7,25 +7,23 @@
     <title>医者天下</title>
     <meta charset="UTF-8">
     <base target="_self">
-    <link rel="stylesheet" href="css/index.css" />
+    <link rel="stylesheet" href="css/index.css"/>
     <script type="text/javascript" src="js/jquery-1.11.2.min.js"></script>
     <script type="text/javascript">
-        function login(){
+        function login() {
             var n = $('#username').val();
             var p = $('#pwd').val();
-            if(n==''){
+            if (n == '') {
                 alert('请输入用户名');
-            }
-            else if(p==''){
+            } else if (p == '') {
                 alert('请输入密码');
-            }
-            else{
+            } else {
                 $('#login_frm').submit();
             }
         }
 
-        $(function(){
-            $('#querySearch').click(function(){
+        $(function () {
+            $('#querySearch').click(function () {
                 $('#med_form').submit();
             });
         });
@@ -37,19 +35,22 @@
 <header id="fastTop" class="header">
     <div class="search_box">
             <span class="logo">
-                <a href="">
-                    <img src="images/logo.jpg"></a>
+                <a href=""><%--<img src="images/logo.jpg">--%></a>
             </span>
         <div class="keyword">
-            <form method="post" id="med_form" action="hospital/hospitalList" onKeyDown="if(event.keyCode==13)return false;">
+            <form method="post" id="med_form" action="hospital/hospitalList"
+                  onKeyDown="if(event.keyCode==13)return false;">
                 <input type="text" name="name" autocomplete="off" placeholder="请输入医院名称"
                        id="search-tips-input" value="">
-                <button type="button"  onclick="$('#med_form').submit() " class="btn-doctor" id="querySearch">搜&nbsp;索</button>
+                <button type="button" onclick="$('#med_form').submit() " class="btn-doctor" id="querySearch">搜&nbsp;索
+                </button>
             </form>
-            <div class="search-suggest-layer" style="display: none; border: 1px #eaeaea solid; margin-top: -2px; width: 466px; background-color: #fff; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; position: absolute; z-index: 1;"></div>
+            <div class="search-suggest-layer"
+                 style="display: none; border: 1px #eaeaea solid; margin-top: -2px; width: 466px; background-color: #fff; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px; position: absolute; z-index: 1;"></div>
         </div>
         <c:if test="${! empty sessionScope.user }">
-            <span  style="margin-left:40px;line-height:32px;font-size: 15px">尊敬的用户[<font color="red">${sessionScope.user.name}</font>]欢迎你！</span>
+            <span style="margin-left:40px;line-height:32px;font-size: 15px">尊敬的用户[<font
+                    color="red">${sessionScope.user.name}</font>]欢迎你！</span>
             &nbsp;&nbsp;<a href = "user/logout"><font color="blue">[退出登陆]</font></a>
         </c:if>
         <c:if test="${empty sessionScope.user}">
@@ -58,7 +59,8 @@
                     <div style="float: left;color:#2896f3;">
                         <form id="login_frm" action="user/login" method="post">
                             <div>用户名：<input type="text" name="user" id="user" style="border: 1px solid #2896f3;"/></div>
-                            <div style="margin-top:2px">密码：<input type="password" name="pwd" id="pwd" style="border: 1px solid #2896f3;"/></div>
+                            <div style="margin-top:2px">密码：<input type="password" name="pwd" id="pwd"
+                                                                  style="border: 1px solid #2896f3;"/></div>
                         </form>
                     </div>
                     <div style="float: right;line-height:42px;margin-left:15px">
@@ -67,7 +69,8 @@
                         </div>
                         <div style="position: absolute;top: 0px;left: 280px">
                             <a href="${pageContext.request.contextPath}/register.jsp">
-                                <input type="button" value="注&nbsp;册" style="width:60px;height:40px;cursor:pointer;border: 1px solid #2896f3;color:#2896f3;"></input>
+                                <input type="button" value="注&nbsp;册"
+                                       style="width:60px;height:40px;cursor:pointer;border: 1px solid #2896f3;color:#2896f3;"></input>
                             </a>
                         </div>
                     </div>
@@ -94,7 +97,11 @@
 <div class="carousel-infos">
     <div id="slideBox" class="slideBox">
         <div class="hd car-item">
-            <ul><li class=""></li><li class=""></li><li class="on"></li></ul>
+            <ul>
+                <li class=""></li>
+                <li class=""></li>
+                <li class="on"></li>
+            </ul>
         </div>
         <div class="bd">
             <ul>
@@ -114,28 +121,36 @@
                     <ul class="tab">
                         <li class="first-tab">医院推荐</li>
                     </ul>
-                    <a id="hos-more" href="hospital/hospitalList" target="_blank"><span class="more-hos">查看全部<img src="images/arrow_normal.png"></span></a></h3>
+                    <a id="hos-more" href="hospital/hospitalList" target="_blank"><span class="more-hos">查看全部<img
+                            src="images/arrow_normal.png"></span></a></h3>
                 <div class="content" id="cityTab">
                     <ul>
                         <c:forEach items="${hospitalTop3}" var="hospital">
-                        <li class="hospital-detail"><a href="hospital/detail/${hospital.hid}" target="_blank">
-                            <img src="${hospital.image}" alt="${hospital.hname}" width="230" height="120"></a>
-                            <p class="hospital-name"><a href="hospital/detail/${hospital.hid}" title="${hospital.hname}" target="_blank"><span class="span-name">${hospital.hname}</span></a>
-                            <i class="star-right star-light star-fixed"></i><i class="star-right star-light star-fixed"></i><i class="star-right star-light star-fixed"></i><i class="star-right star-light star-fixed"></i>
-                            <i class="star-right star-light star-fixed"></i><span class="grade-text ">${hospital.score}</span>
-                            <label class="hospital-grade"><span class="grade">${hospital.grade}</span>
-                                <c:if test="${hospital.insurance == 1}"><span class="corpt">医保</span></c:if>
-                            </label>
-                            </p>
-                            <p class="appointent_total">
-                                <label class="label-right"><span>${hospital.times}</span>&nbsp;人成功预约</label>
-                            </p>
-                        </li>
+                            <li class="hospital-detail"><a href="hospital/detail/${hospital.hid}" target="_blank">
+                                <img src="${hospital.image}" alt="${hospital.hname}" width="230" height="120"></a>
+                                <p class="hospital-name"><a href="hospital/detail/${hospital.hid}"
+                                                            title="${hospital.hname}" target="_blank"><span
+                                        class="span-name">${hospital.hname}</span></a>
+                                    <i class="star-right star-light star-fixed"></i><i
+                                            class="star-right star-light star-fixed"></i><i
+                                            class="star-right star-light star-fixed"></i><i
+                                            class="star-right star-light star-fixed"></i>
+                                    <i class="star-right star-light star-fixed"></i><span
+                                            class="grade-text ">${hospital.score}</span>
+                                    <label class="hospital-grade"><span class="grade">${hospital.grade}</span>
+                                        <c:if test="${hospital.insurance == 1}"><span class="corpt">医保</span></c:if>
+                                    </label>
+                                </p>
+                                <p class="appointent_total">
+                                    <label class="label-right"><span>${hospital.times}</span>&nbsp;人成功预约</label>
+                                </p>
+                            </li>
                         </c:forEach>
                     </ul>
                     <ul class="hospital-info">
                         <c:forEach var="hospital" items="${hospitalList}">
-                            <li><a href="hospital/detail/${hospital.hid}" title="${hospital.hname}" target="_blank"><span class="span-hospital ">${hospital.hname}</span></a>
+                            <li><a href="hospital/detail/${hospital.hid}" title="${hospital.hname}"
+                                   target="_blank"><span class="span-hospital ">${hospital.hname}</span></a>
                                 <label><span class="span-grade">${hospital.grade}</span>
                                     <c:if test="${hospital.insurance == 1}">
                                         <span class="span-corpt">[医保]</span>
@@ -154,18 +169,22 @@
                 <div class="content" style="width: 100%;height: 100%">
                     <ul>
                         <li class="first-info">
-                            <div class="dep-left"><a target="_self" class="dep-title" href="doctor/doctorList?degrade=1"><b>一级科室</b></a></div>
+                            <div class="dep-left"><a target="_self" class="dep-title"
+                                                     href="doctor/doctorList?degrade=1"><b>一级科室</b></a></div>
                             <div class="dep-right">
                                 <c:forEach var="list" items="${deptList1}">
-                                    <a class="dep-item dep-light" href="doctor/doctorList?deid=${list.deid}" target="_self" title="${list.dename}">${list.dename}</a>
+                                    <a class="dep-item dep-light" href="doctor/doctorList?deid=${list.deid}"
+                                       target="_self" title="${list.dename}">${list.dename}</a>
                                 </c:forEach>
                             </div>
                         </li>
                         <li class="first-info">
-                            <div class="dep-left"><a target="_self" class="dep-title" href="doctor/doctorList?degrade=2"><b>二级科室</b></a></div>
+                            <div class="dep-left"><a target="_self" class="dep-title"
+                                                     href="doctor/doctorList?degrade=2"><b>二级科室</b></a></div>
                             <div class="dep-right">
                                 <c:forEach var="list" items="${deptList2}">
-                                    <a class="dep-item dep-light" href="doctor/doctorList?deid=${list.deid}" target="_self" title="${list.dename}">${list.dename}</a>
+                                    <a class="dep-item dep-light" href="doctor/doctorList?deid=${list.deid}"
+                                       target="_self" title="${list.dename}">${list.dename}</a>
                                 </c:forEach>
                             </div>
                         </li>
@@ -176,16 +195,18 @@
 
             <!-- 优质医生-->
             <div id="excel-doctor-div" class="excel-doctor">
-                <h3>名师名医<a href="doctor/doctorList" target="_blank"><span>更多名医<img src="images/arrow_normal.png"></span></a></h3>
+                <h3>名师名医<a href="doctor/doctorList" target="_blank"><span>更多名医<img src="images/arrow_normal.png"></span></a>
+                </h3>
                 <div class="content slideBox2">
                     <div id="pre-arrow" class="pre-arrow prev">
-                        <img data-gray="images/pre_disable.png" data-srchover="images/pre_hover.png" data-src="images/pre_normal.png" src="images/pre_disable.png">
+                        <img data-gray="images/pre_disable.png" data-srchover="images/pre_hover.png"
+                             data-src="images/pre_normal.png" src="images/pre_disable.png">
                     </div>
                     <div class="doctail-detail bd">
                         <ul id="dictor-list-ul">
                             <c:forEach var="doctor" items="${doctorList}">
                                 <li class="doctor-first" style="background-color: rgb(249, 249, 249);">
-                                    <a href="doctor/detail/${doctor.did}" >
+                                    <a href="doctor/detail/${doctor.did}">
                                         <img src="${doctor.image}">
                                     </a>
                                     <p><a target="_blank" href="#"><span>${doctor.dname}</span></a>
@@ -200,19 +221,20 @@
                                     </p>
                                     <p>${doctor.dept.dename}</p>
                                     <p title="${doctor.hospital.hname}">${doctor.hospital.hname}</p>
-                                    <p class="btn-appoint"><a href="doctor/detail/${doctor.did}"><span style="border-color: rgb(1, 151, 241); color: rgb(255, 255, 255); background-color: rgb(1, 151, 241);">一键预约</span></a></p>
+                                    <p class="btn-appoint"><a href="doctor/detail/${doctor.did}"><span
+                                            style="border-color: rgb(1, 151, 241); color: rgb(255, 255, 255); background-color: rgb(1, 151, 241);">一键预约</span></a>
+                                    </p>
                                 </li>
                             </c:forEach>
                         </ul>
                     </div>
                     <div id="next-arrow" class="next-arrow next">
-                        <img data-gray="images/arrow_disable.png" data-srchover="images/arrow_hover.png" data-src="images/arrow_normal.png" src="images/arrow_disable.png">
+                        <img data-gray="images/arrow_disable.png" data-srchover="images/arrow_hover.png"
+                             data-src="images/arrow_normal.png" src="images/arrow_disable.png">
                     </div>
                 </div>
             </div>
             <!-- END优质医生-->
-
-
 
 
         </div>
@@ -263,7 +285,9 @@
     </div>
 </div>
 
-<footer id="footer-three" class="footer-box footer-three clear path" data-src="http://dpp.bdimg.com/static/pc/201604261639/asset" data-href="" data-api="http://yi.baidu.com" data-passport="https://passport.baidu.com">
+<footer id="footer-three" class="footer-box footer-three clear path"
+        data-src="http://dpp.bdimg.com/static/pc/201604261639/asset" data-href="" data-api="http://yi.baidu.com"
+        data-passport="https://passport.baidu.com">
     <div class="footer-con">
         <div class="footer-info-url">
             <dd class="fo-link">
@@ -277,7 +301,6 @@
 </footer>
 
 
-
 <script src="js/jquery-1.11.2.min.js"></script>
 
 <script src="js/uni_login_wrapper.js"></script>
@@ -285,9 +308,9 @@
 <script src="js/jquery.SuperSlide.2.1.1.js"></script>
 
 <script type="text/javascript">
-    jQuery(".slideBox").slide({ mainCell: ".bd ul", autoPlay: true});
+    jQuery(".slideBox").slide({mainCell: ".bd ul", autoPlay: true});
 
-    jQuery(".slideBox2").slide({ mainCell: ".bd ul", vis: 4, scroll: 4, effect: "left", autoPlay: false ,pnLoop:false});
+    jQuery(".slideBox2").slide({mainCell: ".bd ul", vis: 4, scroll: 4, effect: "left", autoPlay: false, pnLoop: false});
 
 
 </script>
