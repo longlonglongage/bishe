@@ -49,4 +49,6 @@ public interface HospitalMapper  {
     void edit(Hospital hospital);
 
     Integer addHospital(Hospital hospital);
+
+    List<Hospital> findHospitalList();
 }

@@ -4,6 +4,7 @@ import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
 import com.ming.hospital.model.PageResult;
 import com.ming.hospital.model.QueryPageBean;
+import com.ming.hospital.pojo.Dept;
 import com.ming.hospital.pojo.Doctor;
 import com.ming.hospital.pojo.Hospital;
 import com.ming.hospital.pojo.Page;
@@ -43,4 +44,8 @@ public interface HospitalService {
     PageResult pageQuery(QueryPageBean queryPageBean);
 
     Hospital findHospitalById(Long hid);
+
+    List<Hospital> findHospitalList();
+
+    List<Dept> findDeptList();
 }

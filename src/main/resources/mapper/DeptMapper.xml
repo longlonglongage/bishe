@@ -178,4 +178,10 @@
       dename = #{dename,jdbcType=VARCHAR}
     where deid = #{deid,jdbcType=BIGINT}
   </update>
+
+  <select id="findHospitalList" resultMap="BaseResultMap"  >
+    select
+    *
+    from dept
+  </select>
 </mapper>

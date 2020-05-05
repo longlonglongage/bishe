@@ -359,4 +359,10 @@
     </where>
   </select>
 
+  <select id="findHospitalList" resultMap="BaseResultMap"  >
+    select
+    *
+    from hospital
+  </select>
+
 </mapper>

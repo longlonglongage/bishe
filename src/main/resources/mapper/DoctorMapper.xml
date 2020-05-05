@@ -382,9 +382,7 @@
   </update>
 
   <select id="selectByPage" resultMap="resultMapDoctor" parameterType="string">
-    select
-    *
-    FROM doctor
+    select * from doctor d JOIN  hospital h on d.hid = h.hid join dept de on de.deid = d.deid
     <where>1=1
       <if test="dname !=null and dname != ''">
         AND INSTR(dname,#{dname})>0

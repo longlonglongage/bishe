@@ -29,4 +29,6 @@ public interface DeptMapper extends BaseMapper<Dept> {
     int updateByPrimaryKeySelective(Dept record);
 
     int updateByPrimaryKey(Dept record);
+
+    List<Dept> findHospitalList();
 }

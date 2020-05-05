@@ -168,4 +168,21 @@ public class HospitalController {
         return Result.ok( hospitalById,"查询数据成功" );
     }
 
+    @RequestMapping("/findHospitalList")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询单条记录")
+    public Result<Object> findHospitalList() {
+        List<Hospital> hospitalList = hospitalService.findHospitalList();
+        return Result.ok( hospitalList,"查询数据成功" );
+    }
+
+    @RequestMapping("/findDeptList")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询单条记录")
+    public Result<Object> findDeptList() {
+        List<Dept> deptList = hospitalService.findDeptList();
+        return Result.ok( deptList,"查询数据成功" );
+    }
+
+
 }

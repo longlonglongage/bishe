@@ -22,6 +22,7 @@
         <property name="typeAliasesPackage" value="com.ming.hospital.pojo"/>
         <property name="mapperLocations" value="classpath:mapper/*.xml"/>
         <property name="configLocation" value="classpath:sqlMapConfig.xml"/>
+        <!--配置pageHelper-->
         <property name="plugins">
             <array>
                 <bean class="com.github.pagehelper.PageInterceptor">

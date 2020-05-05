@@ -2,6 +2,7 @@ package com.ming.hospital.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.ming.hospital.dao.AppointmentMapper;
+import com.ming.hospital.dao.DeptMapper;
 import com.ming.hospital.dao.DoctorMapper;
 import com.ming.hospital.dao.HospitalMapper;
 import com.ming.hospital.dto.DoctorPage;
@@ -26,6 +27,9 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Autowired
     private DoctorMapper doctorMapper;
+
+    @Autowired
+    private DeptMapper deptMapper;
 
     @Autowired
     private AppointmentService appointmentService;
@@ -168,5 +172,15 @@ public class HospitalServiceImpl implements HospitalService {
     @Override
     public Hospital findHospitalById(Long hid) {
         return hospitalMapper.selectByPrimaryKey(hid);
+    }
+
+    @Override
+    public List<Hospital> findHospitalList() {
+        return hospitalMapper.findHospitalList();
+    }
+
+    @Override
+    public List<Dept> findDeptList() {
+        return deptMapper.findHospitalList();
     }
 }
