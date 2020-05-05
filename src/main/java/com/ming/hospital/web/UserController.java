@@ -16,7 +16,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.IOException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -61,11 +63,15 @@ public class UserController {
     }
 
     @RequestMapping(value = "/login",method = {RequestMethod.POST})
-    public String login(User user,HttpServletRequest request){
+    public String login(User user, HttpServletRequest request, HttpServletResponse response) throws IOException {
         User fullUser =  userService.login(user);
         if(fullUser != null){
             HttpSession session = request.getSession();
             session.setAttribute("user",fullUser);
+            if ("admin".equals( fullUser.getName() )){
+                response.sendRedirect( "/Hospital/pages/main.html" );
+                return null;
+            }
             return "forward:/";
         }
         request.setAttribute("msg","账号或密码错误！请重新登陆<a href = ''>医者天下</a>");
