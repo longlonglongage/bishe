@@ -27,7 +27,7 @@ public interface DoctorService {
 
     Integer addDoctor(Doctor doctor);
 
-    Boolean del(Integer id);
+    Boolean del(Long id);
 
     Boolean edit(Doctor doctor);
 }

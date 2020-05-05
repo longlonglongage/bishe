@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -123,23 +124,25 @@ public class DoctorController {
     }
 
     // 添加数据
+    @ResponseBody
     @RequestMapping("/adddoctor")
     public Result add(Doctor doctor) {
-        doctorService.addDoctor(doctor);
+        Integer integer = doctorService.addDoctor(doctor);
         return Result.ok("添加数据成功");
     }
 
     //编辑数据
+    @ResponseBody
     @RequestMapping("edit")
     public Result edit(Doctor doctor) {
         doctorService.edit(doctor);
         return Result.ok("编辑数据成功");
     }
 
-
     //删除数据
+    @ResponseBody
     @RequestMapping("/deldoctor")
-    public Result del(Integer id) {
+    public Result del(Long id) {
         doctorService.del(id);
         return Result.ok("删除数据成功");
     }

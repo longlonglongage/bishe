@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +27,8 @@ import java.util.List;
  */
 @Slf4j
 @Api(value = "医院信息Controller", tags = "医院信息相关接口")
-@RestController
+@Controller
+@RequestMapping("/hospital")
 public class HospitalController {
     @Autowired
     private HospitalService hospitalService;
@@ -128,6 +130,7 @@ public class HospitalController {
     }
 
     @RequestMapping("/findPage")
+    @ResponseBody
     @ApiOperation(value = "分页查询")
     public PageResult selectByPage(@RequestBody QueryPageBean queryPageBean) {
         return hospitalService.pageQuery( queryPageBean );
@@ -135,6 +138,7 @@ public class HospitalController {
 
     // 添加数据
     @RequestMapping("/addhospital")
+    @ResponseBody
     @ApiOperation(value = "添加数据")
     public Result add(@RequestParam(required = true) Hospital hospital) {
         hospitalService.addHospital( hospital );
@@ -143,6 +147,7 @@ public class HospitalController {
 
     //编辑数据
     @RequestMapping("edit")
+    @ResponseBody
     @ApiOperation(value = "编辑数据")
     public Result edit(@RequestParam(required = true) Hospital hospital) {
         hospitalService.edit( hospital );
@@ -150,10 +155,11 @@ public class HospitalController {
     }
 
     //删除数据
-    @RequestMapping("/deldoctor")
+    @RequestMapping("/delhospital")
+    @ResponseBody
     @ApiOperation(value = "删除数据")
-    public Result del(@RequestParam(required = true) @ApiParam(value = "id") Integer id) {
-        doctorService.del( id );
+    public Result del(@RequestParam(required = true) @ApiParam(value = "id") Long id) {
+        hospitalService.del(id);
         return Result.ok( "删除数据成功" );
     }
 

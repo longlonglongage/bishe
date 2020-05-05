@@ -1,10 +1,13 @@
 package com.ming.hospital.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.ming.hospital.dao.AppointmentMapper;
 import com.ming.hospital.dao.DoctorMapper;
 import com.ming.hospital.dao.HospitalMapper;
 import com.ming.hospital.dto.DoctorPage;
 import com.ming.hospital.dto.HospitalPage;
+import com.ming.hospital.model.PageResult;
+import com.ming.hospital.model.QueryPageBean;
 import com.ming.hospital.pojo.*;
 import com.ming.hospital.service.AppointmentService;
 import com.ming.hospital.service.HospitalService;
@@ -123,34 +126,47 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public Integer addHospital(Hospital hospital) {
-        Integer insert = hospitalMapper.addHospital(hospital);
+        Integer insert = hospitalMapper.insert(hospital);
         return insert;
     }
 
     @Override
-    public void del(Integer id) {
-        hospitalMapper.del(id);
+    public Boolean del(Long id) {
+        int i = hospitalMapper.deleteByPrimaryKey(id);
+        if (i!=0){
+            return true;
+        }
+        return false;
     }
+
 
     @Override
     public Boolean edit(Hospital hospital) {
-        String id = "a";
-        Boolean flag =false;
-        Integer integer = hospitalMapper.edit(hospital);
-        if (integer!=0){
-            flag = true;
+        int i = hospitalMapper.updateByPrimaryKey(hospital);
+        if (i!=0){
+            return true;
         }
-        return flag;
+        return false;
+    }
+
+
+    @Override
+    public PageResult pageQuery(QueryPageBean queryPageBean) {
+        //使用 PageHelper 完成分页查询
+        com.github.pagehelper.Page<Hospital> page = PageHelper.startPage(
+                queryPageBean.getCurrentPage(), queryPageBean.getPageSize() ).
+                doSelectPage( () -> hospitalMapper.selectByPage( queryPageBean.getQueryString() ) );
+        return PageResult.builder()
+                //返回总条数
+                .total( page.getTotal() )
+                //返回分页数据集合
+                .rows( page.getResult() ).build();
     }
 
     @Override
     public List<Hospital> selectByPage(String hname) {
-        List<Hospital> hospitals = hospitalMapper.selectByPage(hname);
-        return hospitals;
+        return null;
     }
 
-    @Override
-    public Hospital selectById(Integer id) {
-        return hospitalMapper.selectById(id);
-    }
+
 }

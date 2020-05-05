@@ -74,9 +74,9 @@ public class DoctorServiceImpl implements DoctorService  {
     }
 
     @Override
-    public Boolean del(Integer id) {
+    public Boolean del(Long id) {
         Boolean flag =false;
-        Integer integer = doctorMapper.deleteById(id);
+        Integer integer = doctorMapper.deleteByPrimaryKey(id);
         if (integer!=0){
             flag = true;
         }
@@ -87,7 +87,7 @@ public class DoctorServiceImpl implements DoctorService  {
     public Boolean edit(Doctor doctor) {
         String id = "a";
         Boolean flag =false;
-        Integer integer = doctorMapper.updateById(doctor);
+        Integer integer = doctorMapper.updateByPrimaryKeySelective(doctor);
         if (integer!=0){
             flag = true;
         }

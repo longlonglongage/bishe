@@ -10,14 +10,14 @@ import java.util.List;
 import com.ming.hospital.pojo.Page;
 import org.apache.ibatis.annotations.Param;
 
-public interface DoctorMapper extends BaseMapper<Doctor> {
+public interface DoctorMapper {
     int countByExample(DoctorExample example);
 
     int deleteByExample(DoctorExample example);
 
     int deleteByPrimaryKey(Long did);
 
-    int iinsert(Doctor record);
+    int insert(Doctor record);
 
     int insertSelective(Doctor record);
 
