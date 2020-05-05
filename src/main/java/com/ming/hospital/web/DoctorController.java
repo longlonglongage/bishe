@@ -124,7 +124,6 @@ public class DoctorController {
         return modelAndView;
     }
 
-    // 添加数据
     @ResponseBody
     @RequestMapping("/adddoctor")
     @ApiOperation(value = "添加医生")
@@ -133,30 +132,27 @@ public class DoctorController {
         return Result.ok("添加数据成功");
     }
 
-    //编辑数据
+
     @ResponseBody
     @RequestMapping("/edit")
     @ApiOperation(value = "编辑数据")
-    public Result edit(@RequestParam(required = true) Doctor doctor) {
+    public Result<Object> edit(@RequestBody Doctor doctor) {
         doctorService.edit(doctor);
-        return Result.ok("编辑数据成功");
+        return Result.ok("编辑医生信息成功");
     }
 
-
-    //删除数据
-    @RequestMapping("/deldoctor/{id}")
+    @RequestMapping("/deldoctor/{did}")
     @ResponseBody
     @ApiOperation(value = "删除数据")
-    public Result<Object> del(@PathVariable("id") Long id) {
-        doctorService.del(id);
+    public Result<Object> del(@PathVariable("did") Long did) {
+        doctorService.del(did);
         return Result.ok( "删除数据成功" );
     }
 
-    //查看详情
-    @RequestMapping("/findDoctorById/{hid}")
+    @RequestMapping("/findDoctorById/{did}")
     @ResponseBody
     @ApiOperation(value = "根据id查询单条记录")
-    public Result<Object> findDoctorById(@PathVariable("hid") Long hid) {
+    public Result<Object> findDoctorById(@PathVariable("did") Long hid) {
         Doctor doctorById = doctorService.findDoctorById(hid);
         return Result.ok( doctorById,"查询数据成功" );
     }

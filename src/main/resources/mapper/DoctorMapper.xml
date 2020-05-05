@@ -182,11 +182,11 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.ming.hospital.pojo.Doctor" >
-    insert into doctor (did, dname, gender, 
+    insert into doctor (dname, gender,
       hid, score, grade, deid, 
       skill, description, image, 
       surgeryWeek)
-    values (#{did,jdbcType=BIGINT}, #{dname,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR}, 
+    values ( #{dname,jdbcType=VARCHAR}, #{gender,jdbcType=VARCHAR},
       #{hid,jdbcType=BIGINT}, #{score,jdbcType=REAL}, #{grade,jdbcType=INTEGER}, #{deid,jdbcType=BIGINT}, 
       #{skill,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{image,jdbcType=VARCHAR}, 
       #{surgeryweek,jdbcType=VARCHAR})

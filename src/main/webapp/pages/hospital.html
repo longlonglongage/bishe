@@ -37,11 +37,7 @@
                 <el-table-column prop="hname" label="医院名" align="center"></el-table-column>
                 <el-table-column prop="hphone" label="联系电话" align="center"></el-table-column>
                 <el-table-column prop="address" label="联系地址" align="center"></el-table-column>
-                <el-table-column label="医院等级" align="center">
-                    <template slot-scope="scope">
-                        <span>{{ scope.row.grade == '1' ? '三甲医院' :scope.row.grade == '2' ? '三乙医院' : scope.row.grade == '3' ? '二甲医院' : '二级医院'}}</span>
-                    </template>
-                </el-table-column>
+                <el-table-column prop="grade" label="医院等级" align="center"></el-table-column>
                 <el-table-column label="是否支持医保" align="center">
                     <template slot-scope="scope">
                         <span>{{  scope.row.insurance == '1' ? '支持' : '不支持'}}</span>
@@ -171,18 +167,18 @@
                             <el-col :span="12">
                                 <el-form-item label="医院等级">
                                     <el-select v-model="formData.grade">
-                                        <el-option label="三甲医院" value="1"></el-option>
-                                        <el-option label="三乙医院" value="2"></el-option>
-                                        <el-option label="二甲医院" value="3"></el-option>
-                                        <el-option label="二级医院" value="4"></el-option>
+                                        <el-option label="三甲" value="三甲"></el-option>
+                                        <el-option label="三乙" value="三乙"></el-option>
+                                        <el-option label="二甲" value="二甲"></el-option>
+                                        <el-option label="二级" value="二级"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </el-col>
                             <el-col :span="12">
                                 <el-form-item label="是否支持医保">
                                     <el-select v-model="formData.insurance">
-                                        <el-option label="支持" key="1" value="1"></el-option>
-                                        <el-option label="不支持" key="0" value="0"></el-option>
+                                        <el-option v-for="item in sl" :key="item.id" :value="item.id"
+                                                   :label="item.value"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </el-col>
@@ -239,6 +235,10 @@
                 total: 11,//总记录数
                 queryString: null//查询条件
             },
+            sl:[
+                {id:0,value:'不支持'},
+                {id:1,value:'支持'},
+            ],
             dataList: [],//当前页要展示的分页列表数据
             formData: {},//表单数据
             dialogFormVisible: false,//增加表单是否可见
@@ -288,6 +288,7 @@
             },
             //编辑
             handleEdit() {
+                this.formData.score = 9.8;
                 //进行表单校验
                 this.$refs['dataEditForm'].validate((valid) => {
                     if (valid) {
@@ -320,6 +321,7 @@
             },
             //添加
             handleAdd() {
+                this.formData.score = 9.8;
                 //进行表单校验
                 this.$refs['dataAddForm'].validate((valid) => {
                     if (valid) {
@@ -388,6 +390,8 @@
                     if (res.data.code == 200) {
                         //进行回显，基于VUE的数据绑定实现
                         this.formData = res.data.data;
+                        //this.formData.insurance = res.data.data.insurance;
+                        this.imageUrl="../"+ res.data.data.image;
                     } else {
                         //查询失败，弹出提示
                         this.$message.error(res.data.msg);
