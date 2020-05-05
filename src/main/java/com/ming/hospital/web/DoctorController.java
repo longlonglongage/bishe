@@ -128,7 +128,7 @@ public class DoctorController {
     @ResponseBody
     @RequestMapping("/adddoctor")
     @ApiOperation(value = "添加医生")
-    public Result add(@RequestBody Doctor doctor) {
+    public Result<Object> add(@RequestBody Doctor doctor) {
         Integer integer = doctorService.addDoctor(doctor);
         return Result.ok("添加数据成功");
     }

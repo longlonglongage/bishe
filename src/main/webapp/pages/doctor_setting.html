@@ -281,7 +281,7 @@
             imageUrl: null,//模型数据，用于上传图片完成后图片预览
             pagination: {//分页相关模型数据
                 currentPage: 1,//当前页码
-                pageSize: 10,//每页显示的记录数
+                pageSize: 5,//每页显示的记录数
                 total: 11,//总记录数
                 queryString: null//查询条件
             },
@@ -385,7 +385,7 @@
                     if (valid) {
                         this.formData.surgeryWeek = this.surgeryWeek;
                         //表单数据校验通过，发送ajax请求将表单数据提交到后台
-                        axios.post("/checkitem/add.do", this.formData).then((res) => {
+                        axios.post("/Hospital/doctor/adddoctor", this.formData).then((res) => {
                             //隐藏新增窗口
                             this.dialogFormVisible = false;
                             //判断后台返回的flag值，true表示添加操作成功，false为添加操作失败
@@ -433,12 +433,24 @@
             },
             // 弹出添加窗口
             handleCreate() {
+                //弹出编辑窗口
                 this.resetForm();
                 //弹出新增窗口
                 this.dialogFormVisible = true;
                 if (this.$refs['dataAddForm'] !== undefined) {
                     this.$refs['dataAddForm'].clearValidate() // 重置验证
                 }
+                axios.get("/Hospital/doctor/").then((res) => {
+                    if (res.data.flag) {
+                        //进行回显，基于VUE的数据绑定实现
+                        this.formData = res.data.data;
+                    } else {
+                        //查询失败，弹出提示
+                        this.$message.error(res.data.message);
+                    }
+                }).catch((r) => {
+                    this.showMessage(r);
+                });
             },
             // 弹出编辑窗口
             handleUpdate(row) {
