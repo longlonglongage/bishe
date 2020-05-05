@@ -144,11 +144,10 @@ public class HospitalController {
         return Result.ok( "添加医院成功" );
     }
 
-    //编辑数据
-    @RequestMapping("edit")
+    @RequestMapping("/edit")
     @ResponseBody
     @ApiOperation(value = "编辑数据")
-    public Result<Object> edit(@RequestParam(required = true) Hospital hospital) {
+    public Result<Object> edit(@RequestBody Hospital hospital) {
         hospitalService.edit( hospital );
         return Result.ok( "编辑数据成功" );
     }
@@ -168,6 +167,5 @@ public class HospitalController {
         Hospital hospitalById = hospitalService.findHospitalById(hid);
         return Result.ok( hospitalById,"查询数据成功" );
     }
-
 
 }

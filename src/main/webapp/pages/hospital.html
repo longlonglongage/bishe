@@ -181,8 +181,8 @@
                             <el-col :span="12">
                                 <el-form-item label="是否支持医保">
                                     <el-select v-model="formData.insurance">
-                                        <el-option label="支持" value="1"></el-option>
-                                        <el-option label="不支持" value="0"></el-option>
+                                        <el-option label="支持" key="1" value="1"></el-option>
+                                        <el-option label="不支持" key="0" value="0"></el-option>
                                     </el-select>
                                 </el-form-item>
                             </el-col>
@@ -240,8 +240,7 @@
                 queryString: null//查询条件
             },
             dataList: [],//当前页要展示的分页列表数据
-            formData: {
-            },//表单数据
+            formData: {},//表单数据
             dialogFormVisible: false,//增加表单是否可见
             dialogFormVisible4Edit: false,//编辑表单是否可见
             rules: {//校验规则
@@ -293,8 +292,8 @@
                 this.$refs['dataEditForm'].validate((valid) => {
                     if (valid) {
                         //表单校验通过，可以提交数据
-                        axios.put("/Hospital/hospital/addhospital", this.formData).then((res) => {
-                            if (res.data.flag) {
+                        axios.put("/Hospital/hospital/edit", this.formData).then((res) => {
+                            if (res.data.code == 200) {
                                 //弹出成功提示信息
                                 this.$message({
                                     type: 'success',
@@ -383,12 +382,12 @@
             // 弹出编辑窗口
             handleUpdate(row) {
                 //回显数据，发送ajax请求根据ID查询当前检查项数据
-                axios.get("/Hospital/hospital/findHospitalById" + row.hid).then((res) => {
+                axios.get("/Hospital/hospital/findHospitalById/" + row.hid).then((res) => {
                     //弹出编辑窗口
                     this.dialogFormVisible4Edit = true;
                     if (res.data.code == 200) {
                         //进行回显，基于VUE的数据绑定实现
-                        this.formData = res.data.msg;
+                        this.formData = res.data.data;
                     } else {
                         //查询失败，弹出提示
                         this.$message.error(res.data.msg);
