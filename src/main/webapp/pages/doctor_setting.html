@@ -36,17 +36,17 @@
                 <el-table-column type="index" align="center" label="序号"></el-table-column>
                 <el-table-column prop="dname" label="姓名" align="center"></el-table-column>
                 <el-table-column prop="gender" label="性别" align="center"></el-table-column>
-                <el-table-column prop="hid" label="所属医院" align="center"></el-table-column>
+                <el-table-column prop="hospital.name" label="所属医院" align="center"></el-table-column>
                 <el-table-column label="医生等级" align="center">
                     <template slot-scope="scope">
                         <span>{{ scope.row.grade == '1' ? '主任医师' :scope.row.grade == '2' ? '副主任医师' : scope.row.grade == '3' ? '主治医师' : '普通医师'}}</span>
                     </template>
                 </el-table-column>
-                <el-table-column prop="deid" label="所属科室" align="center"></el-table-column>
+                <el-table-column prop="dept.dename" label="所属科室" align="center"></el-table-column>
                 <el-table-column prop="skill" label="治疗内容" align="center"></el-table-column>
                 <el-table-column prop="score" label="评分" align="center"></el-table-column>
                 <el-table-column prop="description" label="医生描述" align="center"></el-table-column>
-                <el-table-column prop="surgeryWeek" label="手术日期" align="center"></el-table-column>
+                <el-table-column prop="surgeryweek" label="手术日期" align="center"></el-table-column>
                 <el-table-column label="操作" align="center">
                     <template slot-scope="scope">
                         <el-button type="primary" size="mini" @click="handleUpdate(scope.row)">编辑</el-button>
@@ -139,9 +139,9 @@
                         </el-row>
                         <el-row>
                             <el-col :span="12">
-                                <el-form-item label="手术日期" prop="surgeryWeek">
+                                <el-form-item label="手术日期" prop="surgeryweek">
                                     <template>
-                                        <el-checkbox-group v-model="surgeryWeek" :min="1">
+                                        <el-checkbox-group v-model="surgeryweek" :min="1">
                                             <el-checkbox v-for="w in weekdays" :label="w" :key="w">{{w}}</el-checkbox>
                                         </el-checkbox-group>
                                     </template>
@@ -239,7 +239,7 @@
                             <el-col :span="12">
                                 <el-form-item label="手术日期" prop="surgeryWeek">
                                     <template>
-                                        <el-checkbox-group v-model="surgeryWeek" :min="1">
+                                        <el-checkbox-group v-model="surgeryweek" :min="1">
                                             <el-checkbox v-for="w in weekdays" :label="w" :key="w">{{w}}</el-checkbox>
                                         </el-checkbox-group>
                                     </template>
@@ -287,31 +287,6 @@
             },
             weekdays: weekdaysOptions,
             dataList: [
-                {
-                    did: 1,
-                    dname: '张三',
-                    gender: '男',
-                    hid: '军区医院',
-                    grade: 1,
-                    deid: '内科',
-                    skill: '治疗口腔',
-                    score: '9.8',
-                    description: '从1995到至今武汉同济医院;华中科技大学同济医学院外科学博士；美国加州大学洛杉矶分校（UCLA医学中心泌尿外科博士后',
-                    surgeryWeek: '星期三下午,星期四上午,星期四下午'
-
-                },
-                {
-                    did: 10,
-                    dname: '李四',
-                    gender: '女',
-                    hid: '总医院',
-                    grade: 3,
-                    deid: '外科',
-                    skill: '治疗口腔',
-                    score: '9.8',
-                    description: 'good',
-                    surgeryWeek: '星期三下午,星期四上午,星期四下午'
-                },
             ],//当前页要展示的分页列表数据
             surgeryWeek: [],//工作日数据
             dept: [
@@ -444,7 +419,7 @@
                     pageSize: this.pagination.pageSize,
                     queryString: this.pagination.queryString
                 };
-                axios.post("/checkitem/findPage.do", param).then((res) => {
+                axios.post("/Hospital/doctor/findPage", param).then((res) => {
                     //解析Controller响应回的数据，为模型数据赋值
                     this.pagination.total = res.data.total;
                     this.dataList = res.data.rows;

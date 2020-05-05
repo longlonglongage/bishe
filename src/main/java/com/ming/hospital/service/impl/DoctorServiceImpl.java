@@ -105,7 +105,7 @@ public class DoctorServiceImpl implements DoctorService  {
     @Override
     public PageResult pageQuery(QueryPageBean queryPageBean) {
         //使用 PageHelper 完成分页查询
-        com.github.pagehelper.Page<Hospital> page = PageHelper.startPage(
+        com.github.pagehelper.Page<Doctor> page = PageHelper.startPage(
                 queryPageBean.getCurrentPage(), queryPageBean.getPageSize() ).
                 doSelectPage( () -> doctorMapper.selectByPage( queryPageBean.getQueryString() ) );
         return PageResult.builder()

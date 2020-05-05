@@ -28,7 +28,7 @@ public class Doctor {
 
     private Float score;
 
-    private Integer grade;
+    private String grade;
 
     private String skill;
 

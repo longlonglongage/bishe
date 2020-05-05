@@ -135,7 +135,7 @@ public class DoctorController {
 
     //编辑数据
     @ResponseBody
-    @RequestMapping("edit")
+    @RequestMapping("/edit")
     @ApiOperation(value = "编辑数据")
     public Result edit(@RequestParam(required = true) Doctor doctor) {
         doctorService.edit(doctor);

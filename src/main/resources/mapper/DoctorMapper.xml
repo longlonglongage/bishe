@@ -384,7 +384,7 @@
   <select id="selectByPage" resultMap="resultMapDoctor" parameterType="string">
     select
     *
-    FROM hospital
+    FROM doctor
     <where>1=1
       <if test="dname !=null and dname != ''">
         AND INSTR(dname,#{dname})>0
