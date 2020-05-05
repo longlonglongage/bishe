@@ -161,4 +161,13 @@ public class HospitalController {
         return Result.ok( "删除数据成功" );
     }
 
+    @RequestMapping("/findHospitalById/{hid}")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询单条记录")
+    public Result<Object> findHospitalById(@PathVariable("hid") Long hid) {
+        Hospital hospitalById = hospitalService.findHospitalById(hid);
+        return Result.ok( hospitalById,"查询数据成功" );
+    }
+
+
 }

@@ -1,19 +1,20 @@
 package com.ming.hospital.web;
 
 import com.ming.hospital.dto.DoctorPage;
+import com.ming.hospital.model.PageResult;
+import com.ming.hospital.model.QueryPageBean;
 import com.ming.hospital.model.Result;
 import com.ming.hospital.pojo.*;
 import com.ming.hospital.service.DeptService;
 import com.ming.hospital.service.DoctorService;
 import com.ming.hospital.utils.DateUtils;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -126,7 +127,8 @@ public class DoctorController {
     // 添加数据
     @ResponseBody
     @RequestMapping("/adddoctor")
-    public Result add(Doctor doctor) {
+    @ApiOperation(value = "添加医生")
+    public Result add(@RequestBody Doctor doctor) {
         Integer integer = doctorService.addDoctor(doctor);
         return Result.ok("添加数据成功");
     }
@@ -134,17 +136,36 @@ public class DoctorController {
     //编辑数据
     @ResponseBody
     @RequestMapping("edit")
-    public Result edit(Doctor doctor) {
+    @ApiOperation(value = "编辑数据")
+    public Result edit(@RequestParam(required = true) Doctor doctor) {
         doctorService.edit(doctor);
         return Result.ok("编辑数据成功");
     }
 
+
     //删除数据
+    @RequestMapping("/deldoctor/{id}")
     @ResponseBody
-    @RequestMapping("/deldoctor")
-    public Result del(Long id) {
+    @ApiOperation(value = "删除数据")
+    public Result<Object> del(@PathVariable("id") Long id) {
         doctorService.del(id);
-        return Result.ok("删除数据成功");
+        return Result.ok( "删除数据成功" );
+    }
+
+    //查看详情
+    @RequestMapping("/findDoctorById/{hid}")
+    @ResponseBody
+    @ApiOperation(value = "根据id查询单条记录")
+    public Result<Object> findDoctorById(@PathVariable("hid") Long hid) {
+        Doctor doctorById = doctorService.findDoctorById(hid);
+        return Result.ok( doctorById,"查询数据成功" );
+    }
+
+    @RequestMapping("/findPage")
+    @ResponseBody
+    @ApiOperation(value = "分页查询")
+    public PageResult selectByPage(@RequestBody QueryPageBean queryPageBean) {
+        return doctorService.pageQuery( queryPageBean );
     }
 
 }

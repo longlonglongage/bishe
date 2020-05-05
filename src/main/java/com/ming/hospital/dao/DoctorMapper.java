@@ -1,13 +1,12 @@
 package com.ming.hospital.dao;
 
 import com.baomidou.mybatisplus.mapper.BaseMapper;
+import com.github.pagehelper.Page;
 import com.ming.hospital.dto.DoctorPage;
-import com.ming.hospital.pojo.Appointment;
-import com.ming.hospital.pojo.Doctor;
-import com.ming.hospital.pojo.DoctorExample;
+import com.ming.hospital.pojo.*;
+
 import java.util.List;
 
-import com.ming.hospital.pojo.Page;
 import org.apache.ibatis.annotations.Param;
 
 public interface DoctorMapper {
@@ -40,4 +39,12 @@ public interface DoctorMapper {
     Doctor selectById(Long id);
 
     List <Doctor> getListByTop4();
+
+    /**
+     * 分页查询医生
+     *
+     * @param dname 医院名
+     * @return 页面结果
+     */
+    Page<Doctor> selectByPage(@Param( "dname" ) String dname);
 }

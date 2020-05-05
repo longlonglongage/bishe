@@ -126,6 +126,8 @@ public class HospitalServiceImpl implements HospitalService {
 
     @Override
     public Integer addHospital(Hospital hospital) {
+        Float score = new Float(9.8);
+        hospital.setScore(score);
         Integer insert = hospitalMapper.insert(hospital);
         return insert;
     }
@@ -161,5 +163,10 @@ public class HospitalServiceImpl implements HospitalService {
                 .total( page.getTotal() )
                 //返回分页数据集合
                 .rows( page.getResult() ).build();
+    }
+
+    @Override
+    public Hospital findHospitalById(Long hid) {
+        return hospitalMapper.selectByPrimaryKey(hid);
     }
 }

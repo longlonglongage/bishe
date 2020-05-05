@@ -1,7 +1,10 @@
 package com.ming.hospital.service.impl;
 
+import com.github.pagehelper.PageHelper;
 import com.ming.hospital.dao.DoctorMapper;
 import com.ming.hospital.dto.DoctorPage;
+import com.ming.hospital.model.PageResult;
+import com.ming.hospital.model.QueryPageBean;
 import com.ming.hospital.pojo.Doctor;
 import com.ming.hospital.pojo.DoctorExample;
 import com.ming.hospital.pojo.Hospital;
@@ -75,12 +78,11 @@ public class DoctorServiceImpl implements DoctorService  {
 
     @Override
     public Boolean del(Long id) {
-        Boolean flag =false;
-        Integer integer = doctorMapper.deleteByPrimaryKey(id);
-        if (integer!=0){
-            flag = true;
+        Integer i = doctorMapper.deleteByPrimaryKey(id);
+        if (i!=0){
+            return true;
         }
-        return flag;
+        return false;
     }
 
     @Override
@@ -92,5 +94,24 @@ public class DoctorServiceImpl implements DoctorService  {
             flag = true;
         }
         return flag;
+    }
+
+    @Override
+    public Doctor findDoctorById(Long hid) {
+
+        return doctorMapper.selectByPrimaryKey(hid);
+    }
+
+    @Override
+    public PageResult pageQuery(QueryPageBean queryPageBean) {
+        //使用 PageHelper 完成分页查询
+        com.github.pagehelper.Page<Hospital> page = PageHelper.startPage(
+                queryPageBean.getCurrentPage(), queryPageBean.getPageSize() ).
+                doSelectPage( () -> doctorMapper.selectByPage( queryPageBean.getQueryString() ) );
+        return PageResult.builder()
+                //返回总条数
+                .total( page.getTotal() )
+                //返回分页数据集合
+                .rows( page.getResult() ).build();
     }
 }
