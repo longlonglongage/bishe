@@ -162,11 +162,4 @@ public class HospitalServiceImpl implements HospitalService {
                 //返回分页数据集合
                 .rows( page.getResult() ).build();
     }
-
-    @Override
-    public List<Hospital> selectByPage(String hname) {
-        return null;
-    }
-
-
 }

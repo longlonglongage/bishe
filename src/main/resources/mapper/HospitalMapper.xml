@@ -164,12 +164,12 @@
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="iinsert" parameterType="com.ming.hospital.pojo.Hospital" >
-    insert into hospital (hid, hname, hphone, 
+  <insert id="insert" parameterType="com.ming.hospital.pojo.Hospital" >
+    insert into hospital ( hname, hphone,
       address, score, grade, 
       description, insurance, image, 
       times)
-    values (#{hid,jdbcType=BIGINT}, #{hname,jdbcType=VARCHAR}, #{hphone,jdbcType=VARCHAR}, 
+    values ( #{hname,jdbcType=VARCHAR}, #{hphone,jdbcType=VARCHAR},
       #{address,jdbcType=VARCHAR}, #{score,jdbcType=REAL}, #{grade,jdbcType=VARCHAR}, 
       #{description,jdbcType=VARCHAR}, #{insurance,jdbcType=INTEGER}, #{image,jdbcType=VARCHAR}, 
       #{times,jdbcType=INTEGER})

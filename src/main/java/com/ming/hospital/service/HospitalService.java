@@ -41,7 +41,4 @@ public interface HospitalService {
      * @return 分页结果
      */
     PageResult pageQuery(QueryPageBean queryPageBean);
-
-    List<Hospital> selectByPage(String hname);
-
 }

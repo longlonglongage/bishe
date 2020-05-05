@@ -136,30 +136,28 @@ public class HospitalController {
         return hospitalService.pageQuery( queryPageBean );
     }
 
-    // 添加数据
     @RequestMapping("/addhospital")
     @ResponseBody
-    @ApiOperation(value = "添加数据")
-    public Result add(@RequestParam(required = true) Hospital hospital) {
+    @ApiOperation(value = "添加医院")
+    public Result add(@RequestBody Hospital hospital) {
         hospitalService.addHospital( hospital );
-        return Result.ok( "添加数据成功" );
+        return Result.ok( "添加医院成功" );
     }
 
     //编辑数据
     @RequestMapping("edit")
     @ResponseBody
     @ApiOperation(value = "编辑数据")
-    public Result edit(@RequestParam(required = true) Hospital hospital) {
+    public Result<Object> edit(@RequestParam(required = true) Hospital hospital) {
         hospitalService.edit( hospital );
         return Result.ok( "编辑数据成功" );
     }
 
-    //删除数据
-    @RequestMapping("/delhospital")
+    @RequestMapping("/delhospital/{hid}")
     @ResponseBody
     @ApiOperation(value = "删除数据")
-    public Result del(@RequestParam(required = true) @ApiParam(value = "id") Long id) {
-        hospitalService.del(id);
+    public Result<Object> del(@PathVariable("hid") Long hid) {
+        hospitalService.del(hid);
         return Result.ok( "删除数据成功" );
     }
 

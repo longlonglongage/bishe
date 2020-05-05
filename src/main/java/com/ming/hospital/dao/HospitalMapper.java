@@ -1,6 +1,5 @@
 package com.ming.hospital.dao;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
 import com.github.pagehelper.Page;
 import com.ming.hospital.dto.HospitalPage;
 import com.ming.hospital.pojo.Hospital;
