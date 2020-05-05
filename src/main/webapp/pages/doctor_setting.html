@@ -270,7 +270,10 @@
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script src="../plugins/vue/axios-0.18.0.js"></script>
 <script>
-    const weekdaysOptions = ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期天'];
+    const weekdaysOptions = [
+        '星期一上午', '星期一下午', '星期二上午', '星期二下午', '星期三上午', '星期三下午',
+        '星期四上午', '星期四下午', '星期五上午', '星期五下午', '星期六上午', '星期六下午',
+        '星期天上午', '星期天下午'];
     const vue = new Vue({
         el: '#app',
         data: {
@@ -528,7 +531,7 @@
                     type: res.code == 200 ? 'success' : 'error'
                 });
                 //设置模型数据（图片名称），后续提交ajax请求时会提交到后台最终保存到数据库
-                this.formData.image = res.data;
+                this.formData.image = "images/" + res.data;
             },
             //上传图片之前执行
             beforeAvatarUpload(file) {
