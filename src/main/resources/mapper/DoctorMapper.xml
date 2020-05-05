@@ -168,9 +168,7 @@
     </if>
   </select>
   <select id="selectByPrimaryKey" resultMap="resultMapDoctor" parameterType="java.lang.Long" >
-    select
-    <include refid="Base_Column_List" />
-    from doctor
+   select * from doctor d JOIN  hospital h on d.hid = h.hid join dept de on de.deid = d.deid
     where did = #{did,jdbcType=BIGINT}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
